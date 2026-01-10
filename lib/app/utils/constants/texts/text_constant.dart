@@ -1,0 +1,65 @@
+final class TextConstant {
+  
+  static String myProfile = 'Meu Perfil';
+  static String myPosts = 'Minhas Publicações';
+
+  static String logout = 'Sair';
+  static String sucessLoggingAccountTitle = 'Bem-vindo ao PulsePost!';
+
+  static String sucessDeletePostTitle = 'Post Apagado!';
+  static String sucessRegisterPostTitle = 'Post Publicado!';
+
+  static String sucessUpdatePostTitle = 'Post Atualizado!';
+
+  static String logoutAccountTitle = 'Sair da Conta?';
+  static String deletePostTitle = 'Apagar post?';
+
+  static String sucessUpdatePostMessage = 'O post foi atualizado com sucesso.';
+
+  static String sucessRegisterPostMessage = 'O post foi criado com sucesso.';
+
+  static String sucessDeletePostMessage = 'O post foi apagado com sucesso.';
+
+  static String errorTitle = 'Erro!';
+
+  static String errorExecutingMessage =
+      'Houve um erro de execeução! Tente novamente.';
+
+  static String confirm = 'Confirmar';
+  static String cancel = 'Cancelar';
+
+  static String newStoreAddress = 'Novo Post';
+
+  static String images = 'Imagens';
+  static String videos = 'Vídeos';
+  static String texts = 'Textos';
+
+  static String editProduct = 'Editar Post';
+
+  static String save = 'Salvar';
+  static String public = 'Publish';
+
+  static String serverError = 'O PulsePost está fora do ar!';
+  static String fieldError = "Campo obrigarório!";
+  static String minCaractersPassword = 'O mínimo de caracters é 6!';
+  static String postEmpty = 'Nenhum post encontrado!';
+  static String name = 'Nome';
+  static String title = 'Título';
+  static String description = 'Descrição';
+  static String bio = 'Bio';
+  static String email = 'E-mail';
+  static String password = 'Senha';
+
+  static String maxSizeFile = 'O arquivo deve ter no máximo 10MB';
+
+  static String errorTypeFile =
+      'O arquivo deve ser uma imagem (png ou jpeg/jpg) ou um vídeo (mp4)!';
+
+  static String errorTypeImage = 'A imagem ter o formato png ou jpeg/jpg!';
+
+  static String uploadMedia = 'Upload da Mídia';
+
+  static String loggin = 'Fazer Login';
+  static String register = 'Registrar-se';
+  static String dontAccount = 'Clique aqui para registrar uma conta!';
+}
