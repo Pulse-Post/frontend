@@ -1,6 +1,40 @@
 import 'package:flutter_getit/flutter_getit.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:pulse_post/app/data/repositories/user_repository_impl.dart';
+import 'package:pulse_post/app/data/services/client/client_service.dart';
+import 'package:pulse_post/app/data/services/client/client_service_impl.dart';
+import 'package:pulse_post/app/data/services/local/local_storage_service.dart';
+import 'package:pulse_post/app/data/services/local/local_storage_service_impl.dart';
+import 'package:pulse_post/app/data/services/messages/result_message_service.dart';
+import 'package:pulse_post/app/data/services/messages/result_message_service_impl.dart';
+import 'package:pulse_post/app/domain/repositories/user_repository.dart';
+import 'package:pulse_post/app/presentation/controllers/upload/local_upload_controller.dart';
+import 'package:pulse_post/app/presentation/controllers/user/user_controller.dart';
+import 'package:pulse_post/app/presentation/viewModels/user/user_view_model.dart';
+import 'package:pulse_post/app/utils/navigator/navigator_global.dart';
 
 class AppBindings extends ApplicationBindings {
   @override
-  List<Bind<Object>> bindings() => [];
+  List<Bind<Object>> bindings() => [
+    Bind.singleton<LocalStorageService>(
+      (i) => LocalStorageServiceImpl(storage: const FlutterSecureStorage()),
+    ),
+    Bind.singleton<ResultMessageService>(
+      (i) =>
+          ResultMessageServiceImpl(navigatorKey: NavigatorGlobal.navigatorKey),
+    ),
+    Bind.singleton<ClientService>((i) => ClientServiceImpl(i())),
+    Bind.singleton<UserRepository>(
+      (i) => UserRepositoryImpl(clientService: i()),
+    ),
+    Bind.singleton(
+      (i) => UserViewModel(
+        userRepository: i(),
+        localStorageService: i(),
+        resultMessageService: i(),
+      ),
+    ),
+    Bind.singleton((i) => UserController(userViewModel: i())),
+    Bind.lazySingleton((i) => LocalUploadController()),
+  ];
 }

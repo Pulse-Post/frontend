@@ -1,7 +1,7 @@
 // auth_interceptor.dart
 import 'package:dio/dio.dart';
 import 'package:pulse_post/app/data/services/local/local_storage_service.dart';
-import 'package:pulse_post/app/domain/dtos/user_token_dto.dart';
+import 'package:pulse_post/app/domain/dtos/user/user_token_dto.dart';
 import 'package:pulse_post/app/utils/constants/local/local_storage_constant.dart';
 
 final class AuthInterceptor extends InterceptorsWrapper {
