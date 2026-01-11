@@ -27,6 +27,9 @@ abstract class PostViewModelBase with Store {
   @observable
   List<PostDetailDto>? postList;
 
+  @observable
+  List<PostDetailDto>? postListByFileType;
+
   @action
   Future list() async {
     isLoading = true;
@@ -35,6 +38,25 @@ abstract class PostViewModelBase with Store {
       (success) {
         serverError = false;
         postList = success;
+      },
+      (failure) {
+        serverError = true;
+        resultMessageService.showMessageError(
+          TextConstant.errorExecutingMessage,
+        );
+      },
+    );
+    isLoading = false;
+  }
+
+  @action
+  Future listByFileType(String type) async {
+    isLoading = true;
+    final result = await postRepository.listByFileType(type);
+    result.fold(
+      (success) {
+        serverError = false;
+        postListByFileType = success;
       },
       (failure) {
         serverError = true;

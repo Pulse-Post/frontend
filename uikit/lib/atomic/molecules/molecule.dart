@@ -53,4 +53,5 @@ export 'icon/icon_larger_circular_success.dart';
 export 'icon/icon_medium_semi_dark.dart';
 
 export 'images/image_detail.dart';
+
 export 'popup/pop_up_menu.dart';

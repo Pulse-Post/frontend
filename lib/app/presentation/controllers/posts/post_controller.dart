@@ -9,10 +9,8 @@ part 'post_controller.g.dart';
 class PostController = PostControllerBase with _$PostController;
 
 abstract class PostControllerBase with Store {
-    final PostViewModel postViewModel;
-  PostControllerBase({
-    required this.postViewModel,
-  });
+  final PostViewModel postViewModel;
+  PostControllerBase({required this.postViewModel});
 
   @computed
   bool get isLoading => postViewModel.isLoading;
@@ -21,10 +19,16 @@ abstract class PostControllerBase with Store {
   bool get isServerError => postViewModel.serverError;
 
   @computed
-  List<PostDetailDto>? get postList =>
-      postViewModel.postList;
+  List<PostDetailDto>? get postList => postViewModel.postList;
+
+  @computed
+  List<PostDetailDto>? get postListByFileType => postViewModel.postListByFileType;
 
   Future<void> list() async {
     await postViewModel.list();
+  }
+
+  Future<void> listByFileType(String type) async {
+    await postViewModel.listByFileType(type);
   }
 }

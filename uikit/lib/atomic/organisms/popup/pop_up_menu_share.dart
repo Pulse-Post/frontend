@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:uikit/uikit.dart';
 
 class PopUpMenuShare extends StatelessWidget {
-  final String menuIcon;
+  final Widget menuIcon;
   final String firstLabel;
   final String firstIcon;
   final void Function() firtOnTap;
@@ -29,7 +29,7 @@ class PopUpMenuShare extends StatelessWidget {
       menuPadding:
           const EdgeInsets.symmetric(horizontal: 0, vertical: SizeToken.xxs),
       maxWidth: 230,
-      icon: IconLargerCircularNeutral(icon: menuIcon),
+      icon: menuIcon,
       menuList: [
         PopupMenuItem(
           onTap: firtOnTap,

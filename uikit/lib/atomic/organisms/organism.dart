@@ -13,3 +13,4 @@ export 'banner/error/banner_error.dart';
 export 'popup/pop_up_menu_share.dart';
 export 'address/address_details_map.dart';
 export 'address/address_select_map.dart';
+export 'profile/profile_menu_nav_detail.dart';

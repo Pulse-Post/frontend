@@ -31,13 +31,22 @@ mixin _$PostController on PostControllerBase, Store {
         () => super.postList,
         name: 'PostControllerBase.postList',
       )).value;
+  Computed<List<PostDetailDto>?>? _$postListByFileTypeComputed;
+
+  @override
+  List<PostDetailDto>? get postListByFileType =>
+      (_$postListByFileTypeComputed ??= Computed<List<PostDetailDto>?>(
+        () => super.postListByFileType,
+        name: 'PostControllerBase.postListByFileType',
+      )).value;
 
   @override
   String toString() {
     return '''
 isLoading: ${isLoading},
 isServerError: ${isServerError},
-postList: ${postList}
+postList: ${postList},
+postListByFileType: ${postListByFileType}
     ''';
   }
 }

@@ -6,9 +6,13 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pulse_post/app/presentation/controllers/posts/post_controller.dart';
 import 'package:pulse_post/app/presentation/controllers/user/user_controller.dart';
+import 'package:pulse_post/app/presentation/modules/feed/widgets/listPost/list_all_posts_widget.dart';
+import 'package:pulse_post/app/utils/constants/icons/icon_constant.dart';
 import 'package:pulse_post/app/utils/constants/images/image_constant.dart';
 import 'package:pulse_post/app/utils/constants/texts/text_constant.dart';
 import 'package:uikit/uikit.dart';
+// ignore: depend_on_referenced_packages
+import 'package:flutter_svg/flutter_svg.dart';
 
 class FeedPage extends StatefulWidget {
   const FeedPage({super.key});
@@ -39,66 +43,53 @@ class _FeedPageState extends State<FeedPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: RefreshIndicator(
-        onRefresh: () async => init(),
-        child: LayoutBuilder(
-          builder: (context, constraints) => ListView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            padding: EdgeInsets.all(SizeToken.md),
-            children: [
-              ConstrainedBox(
-                constraints: BoxConstraints(maxHeight: constraints.maxHeight),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(80),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(
+            SizeToken.md - 3.5,
+            SizeToken.sm,
+            SizeToken.md,
+            0,
+          ),
+          child: AppBar(
+            title: SvgPicture.asset(
+              ImageConstant.logoHorizontal,
+              height: SizeToken.xxl,
+            ),
+
+            actions: [
+              Padding(
+                padding: const EdgeInsets.all(3.5),
                 child: Observer(
-                  builder: (_) => SizedBox(
-                    width: double.infinity,
-                    child: ButtonSmallDark(
-                      isLoading: userController.isLoading,
-                      text: TextConstant.logout,
-                      onPressed: () async {
-                        await userController.logout();
-                        if (!userController.isTokenValid) {
-                          context.go('/login');
-                        }
-                      },
+                  builder: (_) => PopUpMenuShare(
+                    menuIcon: ProfileMenuNavDetail(
+                      name: userController.user?.name,
+                      image: userController.user?.image,
                     ),
+                    firstLabel: TextConstant.myProfile,
+                    firstIcon: IconConstant.user,
+                    firtOnTap: () => context.push('/my-profile'),
+                    secoundLabel: TextConstant.logout,
+                    secoundIcon: IconConstant.logout,
+                    secoundOnTap: () async {
+                      await userController.logout();
+                      if (!userController.isTokenValid) {
+                        context.go('/login');
+                      }
+                    },
                   ),
                 ),
               ),
-              Observer(
-                builder: (_) {
-                  if (postController.isLoading) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                  if (postController.isServerError) {
-                    return BannerError(
-                      image: ImageConstant.serverError,
-                      text: TextConstant.serverError,
-                    );
-                  }
-
-                  final posts = postController.postList;
-
-                  if (posts == null || posts.isEmpty) {
-                    return BannerError(
-                      image: ImageConstant.empty,
-                      text: TextConstant.postEmpty,
-                    );
-                  }
-                  return ListView.separated(
-                    separatorBuilder: (context, index) =>
-                        const DividerDefault(),
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: postController.postList?.length ?? 0,
-                    itemBuilder: (context, index) {
-                      final post = posts[index];
-                      return TextBodyB2Dark(text: post.toString());
-                    },
-                  );
-                },
-              ),
             ],
           ),
+        ),
+      ),
+      body: RefreshIndicator(
+        onRefresh: () async => init(),
+        child: LayoutBuilder(
+          
+          builder: (context, constraints) => ListAllPostsWidget(),
         ),
       ),
     );

@@ -63,6 +63,24 @@ mixin _$PostViewModel on PostViewModelBase, Store {
     });
   }
 
+  late final _$postListByFileTypeAtom = Atom(
+    name: 'PostViewModelBase.postListByFileType',
+    context: context,
+  );
+
+  @override
+  List<PostDetailDto>? get postListByFileType {
+    _$postListByFileTypeAtom.reportRead();
+    return super.postListByFileType;
+  }
+
+  @override
+  set postListByFileType(List<PostDetailDto>? value) {
+    _$postListByFileTypeAtom.reportWrite(value, super.postListByFileType, () {
+      super.postListByFileType = value;
+    });
+  }
+
   late final _$listAsyncAction = AsyncAction(
     'PostViewModelBase.list',
     context: context,
@@ -73,12 +91,23 @@ mixin _$PostViewModel on PostViewModelBase, Store {
     return _$listAsyncAction.run(() => super.list());
   }
 
+  late final _$listByFileTypeAsyncAction = AsyncAction(
+    'PostViewModelBase.listByFileType',
+    context: context,
+  );
+
+  @override
+  Future<dynamic> listByFileType(String type) {
+    return _$listByFileTypeAsyncAction.run(() => super.listByFileType(type));
+  }
+
   @override
   String toString() {
     return '''
 isLoading: ${isLoading},
 serverError: ${serverError},
-postList: ${postList}
+postList: ${postList},
+postListByFileType: ${postListByFileType}
     ''';
   }
 }

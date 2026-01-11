@@ -35,4 +35,26 @@ class PostRepositoryImpl implements PostRepository {
       );
     }
   }
+
+  @override
+  AsyncResult<List<PostDetailDto>> listByFileType(String type) async {
+    try {
+      final Response response = await clientService.get(
+        "${ApiBackend.post}/list/post-type/$type",
+        requiresAuth: true,
+      );
+      final List<dynamic> resultList = response.data['posts'];
+      final List<PostDetailDto> dataList = resultList
+          .map((item) => PostDetailDto.fromMap(item as Map<String, dynamic>))
+          .toList();
+      return Success(dataList);
+    } on DioException catch (e) {
+      return Failure(
+        RestException(
+          message: TextConstant.errorExecutingMessage,
+          statusCode: e.response?.statusCode ?? 500,
+        ),
+      );
+    }
+  }
 }

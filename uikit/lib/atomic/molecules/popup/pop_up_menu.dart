@@ -31,6 +31,7 @@ class PopUpMenu extends StatelessWidget {
       icon: icon,
       elevation: 0,
       shape: RoundedRectangleBorder(
+        side: const BorderSide(color: ColorToken.semiDark, width: 0.2),
         borderRadius: BorderRadius.circular(SizeToken.sm),
       ),
     );
