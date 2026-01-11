@@ -1,10 +1,15 @@
 final class TextConstant {
-  
   static String myProfile = 'Meu Perfil';
   static String myPosts = 'Minhas Publicações';
 
   static String logout = 'Sair';
   static String sucessLoggingAccountTitle = 'Bem-vindo ao PulsePost!';
+
+  static String sucessRegisterAccountTitle = 'Conta Criada com Sucesso!';
+
+  static String sucessRegisterAccountMessage = 'Agora você pode fazer login.';
+
+  static String sucessLoggingAccountMessage = 'É sempre um prazer te ver por aqui.';
 
   static String sucessDeletePostTitle = 'Post Apagado!';
   static String sucessRegisterPostTitle = 'Post Publicado!';
@@ -41,7 +46,9 @@ final class TextConstant {
 
   static String serverError = 'O PulsePost está fora do ar!';
   static String fieldError = "Campo obrigarório!";
-  static String minCaractersPassword = 'O mínimo de caracters é 6!';
+    static String emailFieldError = "O campo deve ser um e-mail válido!";
+  static String passwordFiledMinCaractersError = 'O mínimo de caracters é 6!';
+
   static String postEmpty = 'Nenhum post encontrado!';
   static String name = 'Nome';
   static String title = 'Título';

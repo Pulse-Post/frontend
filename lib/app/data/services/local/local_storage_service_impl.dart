@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:pulse_post/app/domain/dtos/user_token_dto.dart';
+import 'package:pulse_post/app/domain/dtos/user/user_token_dto.dart';
 
 import 'local_storage_service.dart';
 
