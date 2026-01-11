@@ -43,7 +43,7 @@ class _RegisterPageState extends State<RegisterPage> {
         onRefresh: () async {
           await userController.load();
           if (userController.isTokenValid) {
-            context.push('/home');
+            context.push('/feed');
           }
         },
         child: LayoutBuilder(

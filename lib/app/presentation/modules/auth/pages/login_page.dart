@@ -40,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
         onRefresh: () async {
           await userController.load();
           if (userController.isTokenValid) {
-            context.go('/home');
+            context.go('/feed');
           }
         },
         child: LayoutBuilder(
@@ -80,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
                                   if (userController.isLoading == false) {
                                     await userController.load();
                                     if (userController.isTokenValid) {
-                                      context.go('/home');
+                                      context.go('/feed');
                                     }
                                   }
                                 }

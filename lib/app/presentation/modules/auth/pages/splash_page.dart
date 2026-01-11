@@ -30,7 +30,7 @@ class _SplashPageState extends State<SplashPage> {
     await userController.load();
 
     if (userController.isTokenValid) {
-      context.go('/home');
+      context.go('/feed');
     } else {
       context.go('/login');
     }
