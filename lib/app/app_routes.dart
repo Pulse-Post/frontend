@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:pulse_post/app/presentation/modules/auth/pages/home_page.dart';
 import 'package:pulse_post/app/presentation/modules/auth/pages/login_page.dart';
+import 'package:pulse_post/app/presentation/modules/auth/pages/register_page.dart';
 import 'package:pulse_post/app/presentation/modules/auth/pages/splash_page.dart';
 import 'package:pulse_post/app/utils/navigator/navigator_global.dart';
 
@@ -11,6 +12,7 @@ sealed class AppRoutes {
       GoRoute(path: '/', builder: (context, state) => const SplashPage()),
       GoRoute(path: '/login', builder: (context, state) => const LoginPage()),
       GoRoute(path: '/home', builder: (context, state) => HomePage()),
+      GoRoute(path: '/register', builder: (context, state) => RegisterPage()),
     ],
   );
 }

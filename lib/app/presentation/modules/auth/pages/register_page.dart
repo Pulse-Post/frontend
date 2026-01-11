@@ -4,21 +4,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_getit/flutter_getit.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pulse_post/app/domain/dtos/user/user_login_dto.dart';
+import 'package:pulse_post/app/domain/dtos/user/user_register_dto.dart';
 import 'package:pulse_post/app/presentation/controllers/user/user_controller.dart';
-import 'package:pulse_post/app/presentation/modules/auth/widgets/user_login_form_widget.dart';
+import 'package:pulse_post/app/presentation/modules/auth/widgets/user_register_form_widget.dart';
 import 'package:pulse_post/app/utils/constants/texts/text_constant.dart';
 import 'package:uikit/uikit.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final userController = Injector.get<UserController>();
+
+  final nameEC = TextEditingController();
 
   final emailEC = TextEditingController();
 
@@ -28,6 +30,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void dispose() {
+    nameEC.dispose();
     emailEC.dispose();
     passwordEC.dispose();
     super.dispose();
@@ -40,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
         onRefresh: () async {
           await userController.load();
           if (userController.isTokenValid) {
-            context.go('/home');
+            context.push('/home');
           }
         },
         child: LayoutBuilder(
@@ -55,9 +58,10 @@ class _LoginPageState extends State<LoginPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   spacing: SizeToken.lg,
                   children: [
-                    TextHeadlineH2(text: TextConstant.loggin),
-                    UserLoginFormWidget(
+                    TextHeadlineH2(text: TextConstant.register),
+                    UserRegisterFormWidget(
                       formKey: formKey,
+                      nameEC: nameEC,
                       emailEC: emailEC,
                       passwordEC: passwordEC,
                     ),
@@ -67,21 +71,19 @@ class _LoginPageState extends State<LoginPage> {
                           width: double.infinity,
                           child: ButtonSmallDark(
                             isLoading: userController.isLoading,
-                            text: TextConstant.loggin,
+                            text: TextConstant.register,
                             onPressed: () async {
                               if (formKey.currentState?.validate() ?? false) {
-                                final data = UserLoginDto(
+                                final data = UserRegisterDto(
+                                  name: nameEC.text,
                                   email: emailEC.text,
                                   password: passwordEC.text,
                                 );
                                 try {
-                                  await userController.login(data);
+                                  await userController.register(data);
                                 } finally {
                                   if (userController.isLoading == false) {
-                                    await userController.load();
-                                    if (userController.isTokenValid) {
-                                      context.go('/home');
-                                    }
+                                    context.go('/login');
                                   }
                                 }
                               }
@@ -89,10 +91,6 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         );
                       },
-                    ),
-                    LinkSeeMore(
-                      text: TextConstant.dontAccount,
-                      onTap: () => context.push('/register'),
                     ),
                   ],
                 ),

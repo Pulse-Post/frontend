@@ -26,13 +26,10 @@ class UserRegisterFormWidget extends StatelessWidget {
         children: [
           InputForm(
             hintText: TextConstant.name.toLowerCase(),
-            controller: emailEC,
+            controller: nameEC,
             textInputAction: TextInputAction.next,
             labelText: TextConstant.name,
-            validator: Validatorless.multiple([
-              Validatorless.email(TextConstant.emailFieldError),
-              Validatorless.required(TextConstant.fieldError),
-            ]),
+            validator: Validatorless.required(TextConstant.fieldError),
           ),
           InputForm(
             hintText: TextConstant.email.toLowerCase(),
