@@ -49,7 +49,7 @@ abstract class UserViewModelBase with Store {
         token = success.toString();
         await localStorageService.put(
           LocalStorageConstant.token,
-          success.toString(),
+          result.getOrThrow(),
         );
 
         resultMessageService.showMessageSuccess(

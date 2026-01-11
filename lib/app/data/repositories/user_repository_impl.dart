@@ -44,7 +44,7 @@ class UserRepositoryImpl implements UserRepository {
         data.toMap(),
       );
       final UserTokenDto resultLogin = UserTokenDto.fromMap(
-        response.data['token'],
+        response.data,
       );
       return Success(resultLogin);
     } on DioException catch (e) {
