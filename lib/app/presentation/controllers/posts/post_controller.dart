@@ -1,6 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:io';
+
 import 'package:mobx/mobx.dart';
 import 'package:pulse_post/app/domain/dtos/post/post_detail_dto.dart';
+import 'package:pulse_post/app/domain/dtos/post/post_register_dto.dart';
 
 import 'package:pulse_post/app/presentation/viewModels/posts/post_view_model.dart';
 
@@ -22,7 +25,8 @@ abstract class PostControllerBase with Store {
   List<PostDetailDto>? get postList => postViewModel.postList;
 
   @computed
-  List<PostDetailDto>? get postListByFileType => postViewModel.postListByFileType;
+  List<PostDetailDto>? get postListByFileType =>
+      postViewModel.postListByFileType;
 
   Future<void> list() async {
     await postViewModel.list();
@@ -30,5 +34,9 @@ abstract class PostControllerBase with Store {
 
   Future<void> listByFileType(String type) async {
     await postViewModel.listByFileType(type);
+  }
+
+  Future<void> register(PostRegisterDto data, File? file) async {
+    await postViewModel.register(data, file);
   }
 }

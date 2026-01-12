@@ -5,20 +5,22 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:uikit/uikit.dart';
 
-class InputUploadImage extends StatelessWidget {
+class InputUploadMedia extends StatelessWidget {
   final void Function() onTap;
   final String labelText;
   final String hintText;
   final String icon;
-  final File? image;
+  final bool isVideo;
+  final File? file;
   final String? imageNetwork;
-  const InputUploadImage({
+  const InputUploadMedia({
     super.key,
     required this.onTap,
     required this.labelText,
     required this.hintText,
     required this.icon,
-    this.image, 
+    required this.isVideo,
+    this.file,
     this.imageNetwork,
   });
 
@@ -42,15 +44,17 @@ class InputUploadImage extends StatelessWidget {
               height: 120,
               color: ColorToken.neutral,
               width: double.infinity,
-              child: image != null
+              child: file != null
                   ? Stack(
                       children: [
-                        Image.file(
-                          File(image!.path),
-                          height: 120,
-                          width: double.infinity,
-                          fit: BoxFit.contain,
-                        ),
+                        isVideo
+                            ? VideoPreview(file: file!)
+                            : Image.file(
+                                File(file!.path),
+                                height: 120,
+                                width: double.infinity,
+                                fit: BoxFit.contain,
+                              ),
                         Positioned(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -74,50 +78,52 @@ class InputUploadImage extends StatelessWidget {
                         ),
                       ],
                     )
-                  : imageNetwork != null?
-                  Stack(
-                      children: [
-                        Image.network(
-                          imageNetwork!,
-                          height: 120,
-                          width: double.infinity,
-                          fit: BoxFit.contain,
-                        ),
-                        Positioned(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Row(
+                  : imageNetwork != null
+                      ? Stack(
+                          children: [
+                            Image.network(
+                              imageNetwork!,
+                              height: 120,
+                              width: double.infinity,
+                              fit: BoxFit.contain,
+                            ),
+                            Positioned(
+                              child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  IconSemiLargeSemiDark(
-                                    icon: icon,
-                                    padding: SizeToken.xxs,
-                                  ),
-                                  TextLabelL3SemiDark(
-                                    text: hintText,
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      IconSemiLargeSemiDark(
+                                        icon: icon,
+                                        padding: SizeToken.xxs,
+                                      ),
+                                      TextLabelL3SemiDark(
+                                        text: hintText,
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
+                        )
+                      : Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            IconSemiLargeSemiDark(
+                              icon: icon,
+                              padding: SizeToken.xxs,
+                            ),
+                            TextLabelL3SemiDark(
+                              text: hintText,
+                            ),
+                          ],
                         ),
-                      ],
-                    ): Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        IconSemiLargeSemiDark(
-                          icon: icon,
-                          padding: SizeToken.xxs,
-                        ),
-                        TextLabelL3SemiDark(
-                          text: hintText,
-                        ),
-                      ],
-                    ),
             ),
           ),
         ),

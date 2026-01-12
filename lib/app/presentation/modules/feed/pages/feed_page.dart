@@ -57,8 +57,12 @@ class _FeedPageState extends State<FeedPage> {
               ImageConstant.logoHorizontal,
               height: SizeToken.xxl,
             ),
-
             actions: [
+              IconButtonLargeDark(
+                onTap: () => context.push('/post/register'),
+                icon: IconConstant.add,
+              ),
+              const SizedBox(width: SizeToken.xxs),
               Padding(
                 padding: const EdgeInsets.all(3.5),
                 child: Observer(
@@ -88,7 +92,6 @@ class _FeedPageState extends State<FeedPage> {
       body: RefreshIndicator(
         onRefresh: () async => init(),
         child: LayoutBuilder(
-          
           builder: (context, constraints) => ListAllPostsWidget(),
         ),
       ),

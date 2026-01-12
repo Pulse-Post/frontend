@@ -4,6 +4,7 @@ import 'package:pulse_post/app/presentation/modules/auth/pages/register_page.dar
 import 'package:pulse_post/app/presentation/modules/auth/pages/splash_page.dart';
 import 'package:pulse_post/app/presentation/modules/feed/pages/feed_page.dart';
 import 'package:pulse_post/app/presentation/modules/feed/pages/my_profile_page.dart';
+import 'package:pulse_post/app/presentation/modules/feed/pages/post_register_page.dart';
 import 'package:pulse_post/app/utils/navigator/navigator_global.dart';
 
 sealed class AppRoutes {
@@ -14,7 +15,14 @@ sealed class AppRoutes {
       GoRoute(path: '/login', builder: (context, state) => const LoginPage()),
       GoRoute(path: '/register', builder: (context, state) => RegisterPage()),
       GoRoute(path: '/feed', builder: (context, state) => FeedPage()),
-      GoRoute(path: '/my-profile', builder: (context, state) => MyProfilePage()),
+      GoRoute(
+        path: '/my-profile',
+        builder: (context, state) => MyProfilePage(),
+      ),
+      GoRoute(
+        path: '/post/register',
+        builder: (context, state) => PostRegisterPage(),
+      ),
     ],
   );
 }

@@ -6,7 +6,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pulse_post/app/domain/dtos/user/user_login_dto.dart';
 import 'package:pulse_post/app/presentation/controllers/user/user_controller.dart';
-import 'package:pulse_post/app/presentation/modules/auth/widgets/user_login_form_widget.dart';
+import 'package:pulse_post/app/presentation/modules/auth/widgets/forms/user_login_form_widget.dart';
 import 'package:pulse_post/app/utils/constants/texts/text_constant.dart';
 import 'package:uikit/uikit.dart';
 

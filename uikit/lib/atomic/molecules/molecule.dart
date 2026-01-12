@@ -54,4 +54,6 @@ export 'icon/icon_medium_semi_dark.dart';
 
 export 'images/image_detail.dart';
 
+export 'video/video_preview.dart';
+
 export 'popup/pop_up_menu.dart';

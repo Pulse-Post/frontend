@@ -77,7 +77,7 @@ abstract class UserViewModelBase with Store {
         serverError = false;
         resultMessageService.showMessageSuccess(
           TextConstant.sucessRegisterAccountTitle,
-          TextConstant.sucessRegisterPostMessage,
+          TextConstant.sucessRegisterAccountMessage,
           IconConstant.success,
         );
       },

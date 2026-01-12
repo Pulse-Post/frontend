@@ -1,9 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:io';
+
 import 'package:mobx/mobx.dart';
 
 import 'package:pulse_post/app/data/services/messages/result_message_service.dart';
 import 'package:pulse_post/app/domain/dtos/post/post_detail_dto.dart';
+import 'package:pulse_post/app/domain/dtos/post/post_register_dto.dart';
 import 'package:pulse_post/app/domain/repositories/post_repository.dart';
+import 'package:pulse_post/app/utils/constants/icons/icon_constant.dart';
 import 'package:pulse_post/app/utils/constants/texts/text_constant.dart';
 
 part 'post_view_model.g.dart';
@@ -57,6 +61,29 @@ abstract class PostViewModelBase with Store {
       (success) {
         serverError = false;
         postListByFileType = success;
+      },
+      (failure) {
+        serverError = true;
+        resultMessageService.showMessageError(
+          TextConstant.errorExecutingMessage,
+        );
+      },
+    );
+    isLoading = false;
+  }
+
+  @action
+  Future register(PostRegisterDto data, File? file) async {
+    isLoading = true;
+    final result = await postRepository.register(data, file);
+    result.fold(
+      (success) {
+        serverError = false;
+        resultMessageService.showMessageSuccess(
+          TextConstant.sucessRegisterPostTitle,
+          TextConstant.sucessRegisterPostMessage,
+          IconConstant.success,
+        );
       },
       (failure) {
         serverError = true;

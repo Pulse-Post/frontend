@@ -101,6 +101,16 @@ mixin _$PostViewModel on PostViewModelBase, Store {
     return _$listByFileTypeAsyncAction.run(() => super.listByFileType(type));
   }
 
+  late final _$registerAsyncAction = AsyncAction(
+    'PostViewModelBase.register',
+    context: context,
+  );
+
+  @override
+  Future<dynamic> register(PostRegisterDto data, File? file) {
+    return _$registerAsyncAction.run(() => super.register(data, file));
+  }
+
   @override
   String toString() {
     return '''

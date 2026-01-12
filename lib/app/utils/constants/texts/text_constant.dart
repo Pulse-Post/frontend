@@ -33,7 +33,7 @@ final class TextConstant {
   static String confirm = 'Confirmar';
   static String cancel = 'Cancelar';
 
-  static String newStoreAddress = 'Novo Post';
+  static String newPost = 'Novo Post';
 
   static String images = 'Imagens';
   static String videos = 'Vídeos';
