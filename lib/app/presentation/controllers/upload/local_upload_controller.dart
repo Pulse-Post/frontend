@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:mobx/mobx.dart';
+import 'package:pulse_post/app/domain/enums/post_enum.dart';
 part 'local_upload_controller.g.dart';
 
 class LocalUploadController = LocalUploadControllerBase
@@ -18,6 +19,15 @@ abstract class LocalUploadControllerBase with Store {
   bool isVideo = false;
 
   File? get selectedFile => file != null ? File(file!.path) : null;
+
+  @action
+  void setFileType(String type) {
+    if (type == PostEnum.VIDEO.type) {
+      isVideo = true;
+    } else {
+      isVideo = false;
+    }
+  }
 
   @action
   Future<void> uploadMedia() async {

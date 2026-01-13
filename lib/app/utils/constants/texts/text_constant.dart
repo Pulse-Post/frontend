@@ -39,7 +39,7 @@ final class TextConstant {
   static String videos = 'Vídeos';
   static String texts = 'Textos';
 
-  static String editProduct = 'Editar Post';
+  static String editPost = 'Editar Post';
 
   static String save = 'Salvar';
   static String public = 'Publish';

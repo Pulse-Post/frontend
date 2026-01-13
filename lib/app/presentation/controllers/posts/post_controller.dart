@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:mobx/mobx.dart';
 import 'package:pulse_post/app/domain/dtos/post/post_detail_dto.dart';
 import 'package:pulse_post/app/domain/dtos/post/post_register_dto.dart';
+import 'package:pulse_post/app/domain/dtos/post/post_update_dto.dart';
 
 import 'package:pulse_post/app/presentation/viewModels/posts/post_view_model.dart';
 
@@ -38,5 +39,9 @@ abstract class PostControllerBase with Store {
 
   Future<void> register(PostRegisterDto data, File? file) async {
     await postViewModel.register(data, file);
+  }
+
+  Future<void> update(String id, PostUpdateDto data, File? file) async {
+    await postViewModel.update(id, data, file);
   }
 }

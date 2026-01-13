@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_getit/flutter_getit.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:go_router/go_router.dart';
 import 'package:uikit/uikit.dart';
 
 import 'package:pulse_post/app/presentation/controllers/posts/post_controller.dart';
@@ -52,14 +53,17 @@ class _MyListPostsWidgetState extends State<MyListPostsWidget> {
         return ListView.separated(
           separatorBuilder: (context, index) => const Padding(
             padding: EdgeInsets.symmetric(vertical: SizeToken.sm),
-            child:  DividerDefault(),
+            child: DividerDefault(),
           ),
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemCount: postController.postListByFileType?.length ?? 0,
           itemBuilder: (context, index) {
             final post = posts[index];
-            return TextBodyB2Dark(text: post.toString());
+            return InkWell(
+              onTap: () => context.push('/post/update', extra: post),
+              child: TextBodyB2Dark(text: post.toString()),
+            );
           },
         );
       },

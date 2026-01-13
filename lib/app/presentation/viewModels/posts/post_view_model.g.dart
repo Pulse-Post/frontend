@@ -111,6 +111,16 @@ mixin _$PostViewModel on PostViewModelBase, Store {
     return _$registerAsyncAction.run(() => super.register(data, file));
   }
 
+  late final _$updateAsyncAction = AsyncAction(
+    'PostViewModelBase.update',
+    context: context,
+  );
+
+  @override
+  Future<dynamic> update(String id, PostUpdateDto data, File? file) {
+    return _$updateAsyncAction.run(() => super.update(id, data, file));
+  }
+
   @override
   String toString() {
     return '''

@@ -12,7 +12,7 @@ class InputUploadMedia extends StatelessWidget {
   final String icon;
   final bool isVideo;
   final File? file;
-  final String? imageNetwork;
+  final String? fileUrl;
   const InputUploadMedia({
     super.key,
     required this.onTap,
@@ -21,7 +21,7 @@ class InputUploadMedia extends StatelessWidget {
     required this.icon,
     required this.isVideo,
     this.file,
-    this.imageNetwork,
+    this.fileUrl,
   });
 
   @override
@@ -48,7 +48,9 @@ class InputUploadMedia extends StatelessWidget {
                   ? Stack(
                       children: [
                         isVideo
-                            ? VideoPreview(file: file!)
+                            ? VideoPreview(
+                                file: file,
+                              )
                             : Image.file(
                                 File(file!.path),
                                 height: 120,
@@ -78,15 +80,19 @@ class InputUploadMedia extends StatelessWidget {
                         ),
                       ],
                     )
-                  : imageNetwork != null
+                  : fileUrl != null
                       ? Stack(
                           children: [
-                            Image.network(
-                              imageNetwork!,
-                              height: 120,
-                              width: double.infinity,
-                              fit: BoxFit.contain,
-                            ),
+                            isVideo
+                                ? VideoPreview(
+                                    videoUrl: fileUrl,
+                                  )
+                                : Image.network(
+                                    fileUrl!,
+                                    height: 120,
+                                    width: double.infinity,
+                                    fit: BoxFit.contain,
+                                  ),
                             Positioned(
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,

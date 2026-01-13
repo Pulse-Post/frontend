@@ -6,6 +6,7 @@ import 'package:mobx/mobx.dart';
 import 'package:pulse_post/app/data/services/messages/result_message_service.dart';
 import 'package:pulse_post/app/domain/dtos/post/post_detail_dto.dart';
 import 'package:pulse_post/app/domain/dtos/post/post_register_dto.dart';
+import 'package:pulse_post/app/domain/dtos/post/post_update_dto.dart';
 import 'package:pulse_post/app/domain/repositories/post_repository.dart';
 import 'package:pulse_post/app/utils/constants/icons/icon_constant.dart';
 import 'package:pulse_post/app/utils/constants/texts/text_constant.dart';
@@ -82,6 +83,29 @@ abstract class PostViewModelBase with Store {
         resultMessageService.showMessageSuccess(
           TextConstant.sucessRegisterPostTitle,
           TextConstant.sucessRegisterPostMessage,
+          IconConstant.success,
+        );
+      },
+      (failure) {
+        serverError = true;
+        resultMessageService.showMessageError(
+          TextConstant.errorExecutingMessage,
+        );
+      },
+    );
+    isLoading = false;
+  }
+
+  @action
+  Future update(String id, PostUpdateDto data, File? file) async {
+    isLoading = true;
+    final result = await postRepository.update(id, data, file);
+    result.fold(
+      (success) {
+        serverError = false;
+        resultMessageService.showMessageSuccess(
+          TextConstant.sucessUpdatePostTitle,
+          TextConstant.sucessUpdatePostMessage,
           IconConstant.success,
         );
       },

@@ -6,17 +6,20 @@ import 'package:flutter/material.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 
 class VideoPreview extends StatelessWidget {
-  final File file;
+  final File? file;
+  final String? videoUrl;
+
   const VideoPreview({
     super.key,
-    required this.file,
+    this.file,
+    this.videoUrl,
   });
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Uint8List?>(
         future: VideoThumbnail.thumbnailData(
-          video: file.path,
+          video: file != null ? file!.path : videoUrl!,
           imageFormat: ImageFormat.JPEG,
           maxWidth: 400,
           quality: 75,

@@ -1,25 +1,29 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:flutter_getit/flutter_getit.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pulse_post/app/domain/dtos/post/post_register_dto.dart';
-import 'package:pulse_post/app/presentation/controllers/posts/post_controller.dart';
-import 'package:pulse_post/app/presentation/controllers/upload/local_upload_controller.dart';
-import 'package:pulse_post/app/presentation/modules/feed/widgets/forms/post_register_form_widget.dart';
-import 'package:pulse_post/app/utils/constants/icons/icon_constant.dart';
-import 'package:pulse_post/app/utils/constants/texts/text_constant.dart';
+import 'package:pulse_post/app/domain/dtos/post/post_update_dto.dart';
+import 'package:pulse_post/app/presentation/modules/feed/widgets/forms/post_update_form_widget.dart';
 import 'package:uikit/uikit.dart';
 
-class PostRegisterPage extends StatefulWidget {
-  const PostRegisterPage({super.key});
+import 'package:pulse_post/app/domain/dtos/post/post_detail_dto.dart';
+import 'package:pulse_post/app/presentation/controllers/posts/post_controller.dart';
+import 'package:pulse_post/app/presentation/controllers/upload/local_upload_controller.dart';
+import 'package:pulse_post/app/utils/constants/icons/icon_constant.dart';
+import 'package:pulse_post/app/utils/constants/texts/text_constant.dart';
+
+class PostUpdatePage extends StatefulWidget {
+  final PostDetailDto data;
+  const PostUpdatePage({super.key, required this.data});
 
   @override
-  State<PostRegisterPage> createState() => _PostRegisterPageState();
+  State<PostUpdatePage> createState() => _PostUpdatePageState();
 }
 
-class _PostRegisterPageState extends State<PostRegisterPage> {
+class _PostUpdatePageState extends State<PostUpdatePage> {
   final postController = Injector.get<PostController>();
 
   final titleEC = TextEditingController();
@@ -29,6 +33,14 @@ class _PostRegisterPageState extends State<PostRegisterPage> {
   final uploadController = Injector.get<LocalUploadController>();
 
   final formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    titleEC.text = widget.data.title;
+    descriptionEC.text = widget.data.description;
+    uploadController.setFileType(widget.data.postType);
+  }
 
   @override
   void dispose() {
@@ -57,19 +69,20 @@ class _PostRegisterPageState extends State<PostRegisterPage> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           IconButtonLargeDark(
-                            onTap: () => context.go('/feed'),
+                            onTap: () => context.go('/my-profile'),
                             icon: IconConstant.arrowLeft,
                           ),
                           const SizedBox(width: SizeToken.sm),
-                          TextHeadlineH2(text: TextConstant.newPost),
+                          TextHeadlineH2(text: TextConstant.editPost),
                         ],
                       ),
                     ],
                   ),
-                  PostRegisterFormWidget(
+                  PostUpdateFormWidget(
                     formKey: formKey,
                     titleEC: titleEC,
                     descriptionEC: descriptionEC,
+                    fileUrl: widget.data.file,
                   ),
                   Observer(
                     builder: (_) {
@@ -81,19 +94,22 @@ class _PostRegisterPageState extends State<PostRegisterPage> {
                           onPressed: () async {
                             if (formKey.currentState?.validate() ??
                                 false || uploadController.isSizeValid == true) {
-                              final data = PostRegisterDto(
+                              final data = PostUpdateDto(
                                 title: titleEC.text,
                                 description: descriptionEC.text,
                               );
                               try {
-                                await postController.register(
+                                await postController.update(
+                                  widget.data.id,
                                   data,
                                   uploadController.file,
                                 );
                               } finally {
                                 if (postController.isLoading == false) {
-                                  context.go('/feed');
-                                  await postController.list();
+                                  context.go('/my-profile');
+                                  await postController.listByFileType(
+                                    widget.data.postType,
+                                  );
                                 }
                               }
                             }

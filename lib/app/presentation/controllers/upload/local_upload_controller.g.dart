@@ -79,6 +79,17 @@ mixin _$LocalUploadController on LocalUploadControllerBase, Store {
   );
 
   @override
+  void setFileType(String type) {
+    final _$actionInfo = _$LocalUploadControllerBaseActionController
+        .startAction(name: 'LocalUploadControllerBase.setFileType');
+    try {
+      return super.setFileType(type);
+    } finally {
+      _$LocalUploadControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void removeMedia() {
     final _$actionInfo = _$LocalUploadControllerBaseActionController
         .startAction(name: 'LocalUploadControllerBase.removeMedia');
