@@ -121,6 +121,16 @@ mixin _$PostViewModel on PostViewModelBase, Store {
     return _$updateAsyncAction.run(() => super.update(id, data, file));
   }
 
+  late final _$removeAsyncAction = AsyncAction(
+    'PostViewModelBase.remove',
+    context: context,
+  );
+
+  @override
+  Future<dynamic> remove(String id) {
+    return _$removeAsyncAction.run(() => super.remove(id));
+  }
+
   @override
   String toString() {
     return '''

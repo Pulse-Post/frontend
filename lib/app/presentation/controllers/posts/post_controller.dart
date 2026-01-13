@@ -44,4 +44,8 @@ abstract class PostControllerBase with Store {
   Future<void> update(String id, PostUpdateDto data, File? file) async {
     await postViewModel.update(id, data, file);
   }
+
+  Future<void> remove(String id) async {
+    await postViewModel.remove(id);
+  }
 }

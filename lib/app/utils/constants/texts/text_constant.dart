@@ -9,7 +9,8 @@ final class TextConstant {
 
   static String sucessRegisterAccountMessage = 'Agora você pode fazer login.';
 
-  static String sucessLoggingAccountMessage = 'É sempre um prazer te ver por aqui.';
+  static String sucessLoggingAccountMessage =
+      'É sempre um prazer te ver por aqui.';
 
   static String sucessDeletePostTitle = 'Post Apagado!';
   static String sucessRegisterPostTitle = 'Post Publicado!';
@@ -18,6 +19,8 @@ final class TextConstant {
 
   static String logoutAccountTitle = 'Sair da Conta?';
   static String deletePostTitle = 'Apagar post?';
+  static String deletePostMessage =
+      'Ao confirmar, o post será apagado permanentemente do PulsePost.';
 
   static String sucessUpdatePostMessage = 'O post foi atualizado com sucesso.';
 
@@ -46,7 +49,7 @@ final class TextConstant {
 
   static String serverError = 'O PulsePost está fora do ar!';
   static String fieldError = "Campo obrigarório!";
-    static String emailFieldError = "O campo deve ser um e-mail válido!";
+  static String emailFieldError = "O campo deve ser um e-mail válido!";
   static String passwordFiledMinCaractersError = 'O mínimo de caracters é 6!';
 
   static String postEmpty = 'Nenhum post encontrado!';
@@ -58,11 +61,6 @@ final class TextConstant {
   static String password = 'Senha';
 
   static String maxSizeFile = 'O arquivo deve ter no máximo 10MB';
-
-  static String errorTypeFile =
-      'O arquivo deve ser uma imagem (png ou jpeg/jpg) ou um vídeo (mp4)!';
-
-  static String errorTypeImage = 'A imagem ter o formato png ou jpeg/jpg!';
 
   static String uploadMedia = 'Upload da Mídia';
 

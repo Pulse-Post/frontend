@@ -10,4 +10,5 @@ abstract interface class PostRepository {
   AsyncResult<List<PostDetailDto>> listByFileType(String type);
   AsyncResult<PostDetailDto> register(PostRegisterDto data, File? file);
   AsyncResult<PostDetailDto> update(String id, PostUpdateDto data, File? file);
+  AsyncResult<Object> remove(String id);
 }

@@ -118,4 +118,28 @@ abstract class PostViewModelBase with Store {
     );
     isLoading = false;
   }
+
+
+  @action
+  Future remove(String id) async {
+    isLoading = true;
+    final result = await postRepository.remove(id);
+    result.fold(
+      (success) {
+        serverError = false;
+        resultMessageService.showMessageSuccess(
+          TextConstant.sucessDeletePostTitle,
+          TextConstant.sucessDeletePostMessage,
+          IconConstant.success,
+        );
+      },
+      (failure) {
+        serverError = true;
+        resultMessageService.showMessageError(
+          TextConstant.errorExecutingMessage,
+        );
+      },
+    );
+    isLoading = false;
+  }
 }

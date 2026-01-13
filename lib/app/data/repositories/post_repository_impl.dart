@@ -125,4 +125,22 @@ class PostRepositoryImpl implements PostRepository {
       );
     }
   }
+
+  @override
+  AsyncResult<Object> remove(String id) async {
+    try {
+      await clientService.delete(
+        "${ApiBackend.post}/delete/$id",
+        requiresAuth: true,
+      );
+      return Success(Unit);
+    } on DioException catch (e) {
+      return Failure(
+        RestException(
+          message: TextConstant.errorExecutingMessage,
+          statusCode: e.response?.statusCode ?? 500,
+        ),
+      );
+    }
+  }
 }

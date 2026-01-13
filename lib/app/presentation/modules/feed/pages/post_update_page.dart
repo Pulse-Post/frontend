@@ -76,6 +76,33 @@ class _PostUpdatePageState extends State<PostUpdatePage> {
                           TextHeadlineH2(text: TextConstant.editPost),
                         ],
                       ),
+                      IconButtonLargeLight(
+                        backgroundColor: ColorToken.danger,
+                        isSquareBorderRadius: true,
+                        onTap: () {
+                          showCustomModalBottomSheet(
+                            context: context,
+                            builder: (context) => ModalSheet(
+                              iconBack: IconConstant.arrowLeft,
+                              title: TextConstant.deletePostTitle,
+                              description: TextConstant.deletePostMessage,
+                              cancelText: TextConstant.cancel,
+                              continueText: TextConstant.confirm,
+                              continueOnTap: () async {
+                                try {
+                                  await postController.remove(widget.data.id);
+                                } finally {
+                                  context.go('/my-profile');
+                                  await postController.listByFileType(
+                                    widget.data.postType,
+                                  );
+                                }
+                              },
+                            ),
+                          );
+                        },
+                        icon: IconConstant.remove,
+                      ),
                     ],
                   ),
                   PostUpdateFormWidget(
