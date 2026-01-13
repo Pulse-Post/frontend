@@ -9,17 +9,27 @@ final class TextConstant {
 
   static String sucessRegisterAccountMessage = 'Agora você pode fazer login.';
 
-  static String sucessLoggingAccountMessage = 'É sempre um prazer te ver por aqui.';
+  static String sucessLoggingAccountMessage =
+      'É sempre um prazer te ver por aqui.';
 
   static String sucessDeletePostTitle = 'Post Apagado!';
   static String sucessRegisterPostTitle = 'Post Publicado!';
 
   static String sucessUpdatePostTitle = 'Post Atualizado!';
+  static String sucessUpdateUserTitle = 'Usuário Atualizado!';
 
   static String logoutAccountTitle = 'Sair da Conta?';
   static String deletePostTitle = 'Apagar post?';
+  static String deletePostMessage =
+      'Ao confirmar, o post será apagado permanentemente do PulsePost.';
+
+  static String createdAt(String dateTime) => "Postado em $dateTime";
+  static String updatedAt(String dateTime) => "Editado em $dateTime";
 
   static String sucessUpdatePostMessage = 'O post foi atualizado com sucesso.';
+
+  static String sucessUpdateUserMessage =
+      'O Usuário foi atualizado com sucesso.';
 
   static String sucessRegisterPostMessage = 'O post foi criado com sucesso.';
 
@@ -33,20 +43,24 @@ final class TextConstant {
   static String confirm = 'Confirmar';
   static String cancel = 'Cancelar';
 
-  static String newStoreAddress = 'Novo Post';
+  static String camera = 'Câmera';
+  static String files = 'Arquivos';
+
+  static String newPost = 'Novo Post';
 
   static String images = 'Imagens';
   static String videos = 'Vídeos';
   static String texts = 'Textos';
 
-  static String editProduct = 'Editar Post';
+  static String editPost = 'Editar Post';
+  static String editUser = 'Editar Perfil';
 
   static String save = 'Salvar';
   static String public = 'Publish';
 
   static String serverError = 'O PulsePost está fora do ar!';
   static String fieldError = "Campo obrigarório!";
-    static String emailFieldError = "O campo deve ser um e-mail válido!";
+  static String emailFieldError = "O campo deve ser um e-mail válido!";
   static String passwordFiledMinCaractersError = 'O mínimo de caracters é 6!';
 
   static String postEmpty = 'Nenhum post encontrado!';
@@ -58,11 +72,6 @@ final class TextConstant {
   static String password = 'Senha';
 
   static String maxSizeFile = 'O arquivo deve ter no máximo 10MB';
-
-  static String errorTypeFile =
-      'O arquivo deve ser uma imagem (png ou jpeg/jpg) ou um vídeo (mp4)!';
-
-  static String errorTypeImage = 'A imagem ter o formato png ou jpeg/jpg!';
 
   static String uploadMedia = 'Upload da Mídia';
 

@@ -22,11 +22,10 @@ export 'text/text_label_l4_success.dart';
 export 'text/text_label_l4_secondary.dart';
 export 'text/text_label_l5_dark.dart';
 export 'text/text_label_l5_info.dart';
+export 'text/text_label_l6_semi_dark.dart';
 
-export 'button/button_large.dart';
 export 'button/button_small_dark.dart';
 export 'button/button_small_light.dart';
-export 'button/button_small_semi_dark.dart';
 export 'button/button_cancel.dart';
 export 'button/button_progress.dart';
 
@@ -48,9 +47,9 @@ export 'icon/icon_large_light.dart';
 export 'icon/icon_large_semi_dark.dart';
 export 'icon/icon_semi_large_semi_dark.dart';
 export 'icon/icon_larger_circular_danger.dart';
-export 'icon/icon_larger_circular_neutral.dart';
 export 'icon/icon_larger_circular_success.dart';
-export 'icon/icon_medium_semi_dark.dart';
 
-export 'images/image_detail.dart';
+
+export 'video/video_preview.dart';
+
 export 'popup/pop_up_menu.dart';

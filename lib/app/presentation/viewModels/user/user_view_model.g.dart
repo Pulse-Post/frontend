@@ -131,6 +131,16 @@ mixin _$UserViewModel on UserViewModelBase, Store {
     return _$loadTokenAsyncAction.run(() => super.loadToken());
   }
 
+  late final _$updateAsyncAction = AsyncAction(
+    'UserViewModelBase.update',
+    context: context,
+  );
+
+  @override
+  Future<dynamic> update(UserUpdateDto data, File? file) {
+    return _$updateAsyncAction.run(() => super.update(data, file));
+  }
+
   @override
   String toString() {
     return '''
