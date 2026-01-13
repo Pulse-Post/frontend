@@ -45,6 +45,24 @@ mixin _$PostViewModel on PostViewModelBase, Store {
     });
   }
 
+  late final _$postAtom = Atom(
+    name: 'PostViewModelBase.post',
+    context: context,
+  );
+
+  @override
+  PostDetailDto? get post {
+    _$postAtom.reportRead();
+    return super.post;
+  }
+
+  @override
+  set post(PostDetailDto? value) {
+    _$postAtom.reportWrite(value, super.post, () {
+      super.post = value;
+    });
+  }
+
   late final _$postListAtom = Atom(
     name: 'PostViewModelBase.postList',
     context: context,
@@ -131,11 +149,22 @@ mixin _$PostViewModel on PostViewModelBase, Store {
     return _$removeAsyncAction.run(() => super.remove(id));
   }
 
+  late final _$detailAsyncAction = AsyncAction(
+    'PostViewModelBase.detail',
+    context: context,
+  );
+
+  @override
+  Future<dynamic> detail(String id) {
+    return _$detailAsyncAction.run(() => super.detail(id));
+  }
+
   @override
   String toString() {
     return '''
 isLoading: ${isLoading},
 serverError: ${serverError},
+post: ${post},
 postList: ${postList},
 postListByFileType: ${postListByFileType}
     ''';

@@ -143,4 +143,24 @@ class PostRepositoryImpl implements PostRepository {
       );
     }
   }
+
+  @override
+  AsyncResult<PostDetailDto> detail(String id) async {
+    try {
+      final Response response = await clientService.get(
+        "${ApiBackend.post}/$id",
+        requiresAuth: true,
+      );
+
+      final PostDetailDto resultDetail = PostDetailDto.fromMap(response.data);
+      return Success(resultDetail);
+    } on DioException catch (e) {
+      return Failure(
+        RestException(
+          message: TextConstant.errorExecutingMessage,
+          statusCode: e.hashCode,
+        ),
+      );
+    }
+  }
 }

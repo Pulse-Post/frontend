@@ -23,6 +23,13 @@ mixin _$PostController on PostControllerBase, Store {
     () => super.isServerError,
     name: 'PostControllerBase.isServerError',
   )).value;
+  Computed<PostDetailDto?>? _$postComputed;
+
+  @override
+  PostDetailDto? get post => (_$postComputed ??= Computed<PostDetailDto?>(
+    () => super.post,
+    name: 'PostControllerBase.post',
+  )).value;
   Computed<List<PostDetailDto>?>? _$postListComputed;
 
   @override
@@ -45,6 +52,7 @@ mixin _$PostController on PostControllerBase, Store {
     return '''
 isLoading: ${isLoading},
 isServerError: ${isServerError},
+post: ${post},
 postList: ${postList},
 postListByFileType: ${postListByFileType}
     ''';

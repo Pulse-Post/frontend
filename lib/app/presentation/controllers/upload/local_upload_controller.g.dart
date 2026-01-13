@@ -63,6 +63,12 @@ mixin _$LocalUploadController on LocalUploadControllerBase, Store {
     });
   }
 
+  @override
+  ObservableFuture<void> pickImageFromCamera() {
+    final _$future = super.pickImageFromCamera();
+    return ObservableFuture<void>(_$future, context: context);
+  }
+
   late final _$uploadMediaAsyncAction = AsyncAction(
     'LocalUploadControllerBase.uploadMedia',
     context: context,
@@ -71,6 +77,16 @@ mixin _$LocalUploadController on LocalUploadControllerBase, Store {
   @override
   Future<void> uploadMedia() {
     return _$uploadMediaAsyncAction.run(() => super.uploadMedia());
+  }
+
+  late final _$uploadImageAsyncAction = AsyncAction(
+    'LocalUploadControllerBase.uploadImage',
+    context: context,
+  );
+
+  @override
+  Future<void> uploadImage() {
+    return _$uploadImageAsyncAction.run(() => super.uploadImage());
   }
 
   late final _$LocalUploadControllerBaseActionController = ActionController(

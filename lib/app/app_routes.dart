@@ -1,8 +1,10 @@
 import 'package:go_router/go_router.dart';
 import 'package:pulse_post/app/domain/dtos/post/post_detail_dto.dart';
+import 'package:pulse_post/app/domain/dtos/user/user_detail_dto.dart';
 import 'package:pulse_post/app/presentation/modules/auth/pages/login_page.dart';
 import 'package:pulse_post/app/presentation/modules/auth/pages/register_page.dart';
 import 'package:pulse_post/app/presentation/modules/auth/pages/splash_page.dart';
+import 'package:pulse_post/app/presentation/modules/auth/pages/update_page.dart';
 import 'package:pulse_post/app/presentation/modules/feed/pages/feed_page.dart';
 import 'package:pulse_post/app/presentation/modules/feed/pages/my_profile_page.dart';
 import 'package:pulse_post/app/presentation/modules/feed/pages/post_register_page.dart';
@@ -22,15 +24,19 @@ sealed class AppRoutes {
         builder: (context, state) => MyProfilePage(),
       ),
       GoRoute(
+        path: '/update',
+        builder: (context, state) =>
+            UpdatePage(data: state.extra as UserDetailDto),
+      ),
+      GoRoute(
         path: '/post/register',
         builder: (context, state) => PostRegisterPage(),
       ),
-       GoRoute(
-      path: '/post/update',
-      builder: (context, state) => PostUpdatePage(
-        data: state.extra as PostDetailDto,
+      GoRoute(
+        path: '/post/update',
+        builder: (context, state) =>
+            PostUpdatePage(data: state.extra as PostDetailDto),
       ),
-    ),
     ],
   );
 }

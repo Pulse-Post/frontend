@@ -84,7 +84,6 @@ class _PostUpdatePageState extends State<PostUpdatePage> {
                             context: context,
                             builder: (context) => ModalSheet(
                               iconBack: IconConstant.arrowLeft,
-                              title: TextConstant.deletePostTitle,
                               description: TextConstant.deletePostMessage,
                               cancelText: TextConstant.cancel,
                               continueText: TextConstant.confirm,

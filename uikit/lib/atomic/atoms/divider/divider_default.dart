@@ -1,14 +1,21 @@
-import 'package:uikit/uikit.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:uikit/uikit.dart';
 
 class DividerDefault extends StatelessWidget {
-  const DividerDefault({super.key});
+  final Color? color;
+  final double? thickness;
+  const DividerDefault({
+    super.key,
+    this.color,
+    this.thickness,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return const Divider(
-      color: ColorToken.semiDark,
-      thickness: 0.2,
+    return Divider(
+      color: color ?? ColorToken.semiDark,
+      thickness: thickness ?? 0.2,
     );
   }
 }

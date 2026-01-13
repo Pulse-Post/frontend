@@ -1,7 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:pulse_post/app/data/exceptions/rest_exception.dart';
 import 'package:pulse_post/app/domain/dtos/user/user_token_dto.dart';
+import 'package:pulse_post/app/domain/dtos/user/user_update_dto.dart';
 import 'package:pulse_post/app/utils/apis/api_backend.dart';
 import 'package:pulse_post/app/utils/constants/texts/text_constant.dart';
 import 'package:result_dart/result_dart.dart';
@@ -68,6 +71,36 @@ class UserRepositoryImpl implements UserRepository {
         response.data,
       );
       return Success(userRegister);
+    } on DioException catch (e) {
+      return Failure(
+        RestException(
+          message: TextConstant.errorExecutingMessage,
+          statusCode: e.response?.statusCode ?? 500,
+        ),
+      );
+    }
+  }
+
+  @override
+  AsyncResult<UserDetailDto> update(UserUpdateDto data, File? file) async{
+  try {
+      final FormData formData = FormData.fromMap({
+        ...data.toMap(),
+        if (file != null)
+          'image': MultipartFile.fromBytes(
+            await file.readAsBytes(),
+            filename: file.path.split('/').last,
+          ),
+      });
+
+      final Response response = await clientService.patch(
+        "${ApiBackend.user}/update",
+        formData,
+        requiresAuth: true,
+        contentType: 'multipart/form-data',
+      );
+      final UserDetailDto userUpdate = UserDetailDto.fromMap(response.data);
+      return Success(userUpdate);
     } on DioException catch (e) {
       return Failure(
         RestException(

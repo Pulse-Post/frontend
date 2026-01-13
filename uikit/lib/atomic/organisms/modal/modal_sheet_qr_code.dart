@@ -42,11 +42,15 @@ class ModalSheetQrCode extends StatelessWidget {
         ),
         child: Wrap(
           children: [
-            
             RepaintBoundary(
               key: repaintKey,
               child: Container(
-                padding: const EdgeInsets.only(top: SizeToken.md, bottom: SizeToken.lg, left: SizeToken.md, right: SizeToken.sm,),
+                padding: const EdgeInsets.only(
+                  top: SizeToken.md,
+                  bottom: SizeToken.lg,
+                  left: SizeToken.md,
+                  right: SizeToken.sm,
+                ),
                 color: ColorToken.light,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,

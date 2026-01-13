@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:io';
+
 import 'package:mobx/mobx.dart';
 import 'package:pulse_post/app/data/exceptions/rest_exception.dart';
 
@@ -7,6 +9,7 @@ import 'package:pulse_post/app/data/services/messages/result_message_service.dar
 import 'package:pulse_post/app/domain/dtos/user/user_detail_dto.dart';
 import 'package:pulse_post/app/domain/dtos/user/user_login_dto.dart';
 import 'package:pulse_post/app/domain/dtos/user/user_register_dto.dart';
+import 'package:pulse_post/app/domain/dtos/user/user_update_dto.dart';
 import 'package:pulse_post/app/domain/repositories/user_repository.dart';
 import 'package:pulse_post/app/utils/constants/icons/icon_constant.dart';
 import 'package:pulse_post/app/utils/constants/local/local_storage_constant.dart';
@@ -129,4 +132,30 @@ abstract class UserViewModelBase with Store {
   Future<void> loadToken() async {
     token ??= await localStorageService.get(LocalStorageConstant.token);
   }
+
+
+  @action
+  Future update(UserUpdateDto data, File? file) async {
+    isLoading = true;
+    final result = await userRepository.update(data, file);
+    result.fold(
+      (success) {
+        serverError = false;
+        resultMessageService.showMessageSuccess(
+          TextConstant.sucessUpdateUserTitle,
+          TextConstant.sucessUpdateUserMessage,
+          IconConstant.success,
+        );
+      },
+      (failure) {
+        serverError = true;
+        resultMessageService.showMessageError(
+          TextConstant.errorExecutingMessage,
+        );
+      },
+    );
+    isLoading = false;
+  }
+
+
 }

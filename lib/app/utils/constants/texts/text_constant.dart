@@ -16,13 +16,20 @@ final class TextConstant {
   static String sucessRegisterPostTitle = 'Post Publicado!';
 
   static String sucessUpdatePostTitle = 'Post Atualizado!';
+  static String sucessUpdateUserTitle = 'Usuário Atualizado!';
 
   static String logoutAccountTitle = 'Sair da Conta?';
   static String deletePostTitle = 'Apagar post?';
   static String deletePostMessage =
       'Ao confirmar, o post será apagado permanentemente do PulsePost.';
 
+  static String createdAt(String dateTime) => "Postado em $dateTime";
+  static String updatedAt(String dateTime) => "Editado em $dateTime";
+
   static String sucessUpdatePostMessage = 'O post foi atualizado com sucesso.';
+
+  static String sucessUpdateUserMessage =
+      'O Usuário foi atualizado com sucesso.';
 
   static String sucessRegisterPostMessage = 'O post foi criado com sucesso.';
 
@@ -36,6 +43,9 @@ final class TextConstant {
   static String confirm = 'Confirmar';
   static String cancel = 'Cancelar';
 
+  static String camera = 'Câmera';
+  static String files = 'Arquivos';
+
   static String newPost = 'Novo Post';
 
   static String images = 'Imagens';
@@ -43,6 +53,7 @@ final class TextConstant {
   static String texts = 'Textos';
 
   static String editPost = 'Editar Post';
+  static String editUser = 'Editar Perfil';
 
   static String save = 'Salvar';
   static String public = 'Publish';

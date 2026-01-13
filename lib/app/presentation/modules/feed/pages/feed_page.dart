@@ -92,7 +92,10 @@ class _FeedPageState extends State<FeedPage> {
       body: RefreshIndicator(
         onRefresh: () async => init(),
         child: LayoutBuilder(
-          builder: (context, constraints) => ListAllPostsWidget(),
+          builder: (context, constraints) => Padding(
+            padding: const EdgeInsets.only(bottom: SizeToken.lg),
+            child: ListAllPostsWidget(),
+          ),
         ),
       ),
     );

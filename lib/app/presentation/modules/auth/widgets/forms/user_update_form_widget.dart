@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_getit/flutter_getit.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -9,15 +8,17 @@ import 'package:pulse_post/app/utils/constants/texts/text_constant.dart';
 import 'package:uikit/uikit.dart';
 import 'package:validatorless/validatorless.dart';
 
-class PostRegisterFormWidget extends StatelessWidget {
+class UserUpdateFormWidget extends StatelessWidget {
   final GlobalKey<FormState> formKey;
-  final TextEditingController titleEC;
-  final TextEditingController descriptionEC;
-  PostRegisterFormWidget({
+  final TextEditingController nameEC;
+  final TextEditingController bioEC;
+  final String? fileUrl;
+  UserUpdateFormWidget({
     super.key,
     required this.formKey,
-    required this.titleEC,
-    required this.descriptionEC,
+    required this.nameEC,
+    required this.bioEC,
+    this.fileUrl,
   });
 
   final uploadController = Injector.get<LocalUploadController>();
@@ -44,14 +45,14 @@ class PostRegisterFormWidget extends StatelessWidget {
                         builder: (context) => ModalSheet(
                           cancelText: TextConstant.camera,
                           continueText: TextConstant.files,
-                          cancelcontinueOnTap: () {
-                            uploadController.pickImageFromCamera();
-                            context.pop();
+                          cancelcontinueOnTap: (){
+                              uploadController.pickImageFromCamera();
+                              context.pop();
                           },
-                          continueOnTap: () {
-                            uploadController.uploadMedia();
+                          continueOnTap: (){
+                            uploadController.uploadImage();
                             context.pop();
-                          },
+                          } 
                         ),
                       );
                     },
@@ -59,6 +60,7 @@ class PostRegisterFormWidget extends StatelessWidget {
                     hintText: TextConstant.uploadMedia,
                     icon: IconConstant.upload,
                     isVideo: uploadController.isVideo,
+                    fileUrl: fileUrl,
                   ),
                   uploadController.isSizeValid
                       ? SizedBox.shrink()
@@ -68,19 +70,18 @@ class PostRegisterFormWidget extends StatelessWidget {
             },
           ),
           InputForm(
-            hintText: TextConstant.title.toLowerCase(),
-            controller: titleEC,
+            hintText: TextConstant.name.toLowerCase(),
+            controller: nameEC,
             textInputAction: TextInputAction.next,
-            labelText: TextConstant.title,
+            labelText: TextConstant.name,
             validator: Validatorless.required(TextConstant.fieldError),
           ),
           InputForm(
-            hintText: TextConstant.description.toLowerCase(),
-            controller: descriptionEC,
+            hintText: TextConstant.bio.toLowerCase(),
+            controller: bioEC,
             maxLines: 6,
             textInputAction: TextInputAction.next,
-            labelText: TextConstant.description,
-            validator: Validatorless.required(TextConstant.fieldError),
+            labelText: TextConstant.bio,
           ),
         ],
       ),

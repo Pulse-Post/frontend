@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_getit/flutter_getit.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:go_router/go_router.dart';
 import 'package:uikit/uikit.dart';
 import 'package:validatorless/validatorless.dart';
 
@@ -40,7 +41,23 @@ class PostUpdateFormWidget extends StatelessWidget {
                 children: [
                   InputUploadMedia(
                     file: uploadController.selectedFile,
-                    onTap: uploadController.uploadMedia,
+                    onTap: () {
+                      showCustomModalBottomSheet(
+                        context: context,
+                        builder: (context) => ModalSheet(
+                          cancelText: TextConstant.camera,
+                          continueText: TextConstant.files,
+                          cancelcontinueOnTap: () {
+                            uploadController.pickImageFromCamera();
+                            context.pop();
+                          },
+                          continueOnTap: () {
+                            uploadController.uploadMedia();
+                            context.pop();
+                          },
+                        ),
+                      );
+                    },
                     labelText: TextConstant.uploadMedia,
                     hintText: TextConstant.uploadMedia,
                     icon: IconConstant.upload,

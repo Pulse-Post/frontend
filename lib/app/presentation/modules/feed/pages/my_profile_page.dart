@@ -59,7 +59,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                   builder: (_) {
                     return SingleChildScrollView(
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
 
                         children: [
                           const SizedBox(height: SizeToken.md),
@@ -76,6 +76,13 @@ class _MyProfilePageState extends State<MyProfilePage> {
                                   const SizedBox(width: SizeToken.sm),
                                   TextHeadlineH2(text: TextConstant.myProfile),
                                 ],
+                              ),
+                              IconButtonLargeDark(
+                                onTap: () => context.push(
+                                  '/update',
+                                  extra: userController.user,
+                                ),
+                                icon: IconConstant.edit,
                               ),
                             ],
                           ),
@@ -105,31 +112,24 @@ class _MyProfilePageState extends State<MyProfilePage> {
                                 ),
                                 child: Column(
                                   spacing: SizeToken.xs,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+
                                   children: [
-                                    Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      spacing: SizeToken.sm,
+                                    ProfileMenuNavDetail(
+                                      name: user?.name,
+                                      image: user?.image,
+                                      size: SizeToken.xl6,
+                                    ),
+                                    Column(
                                       children: [
-                                        ProfileMenuNavDetail(
-                                          name: user?.name,
-                                          image: user?.image,
-                                          isLarge: true,
+                                        TextLabelL1Dark(
+                                          text: user!.name.toString(),
                                         ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            TextLabelL1Dark(
-                                              text: user!.name.toString(),
-                                            ),
-                                          ],
-                                        ),
+                                        if (user.bio != null)
+                                          TextBodyB1SemiDark(
+                                            text: user.bio.toString(),
+                                          ),
                                       ],
                                     ),
-                                    if (user.bio != null)
-                                      TextBodyB1SemiDark(text: user.bio!),
                                   ],
                                 ),
                               );
@@ -141,88 +141,89 @@ class _MyProfilePageState extends State<MyProfilePage> {
                   },
                 ),
               ),
-              SizedBox(height: SizeToken.sm),
-              DividerDefault(),
-              SizedBox(height: SizeToken.sm),
-              Observer(
-                builder: (context) {
-                  final index = navigartorController.currentIndex;
-                  return Row(
-                    spacing: SizeToken.sm,
-                    children: [
-                      Expanded(
-                        child: index == 0
-                            ? ButtonSmallDark(
-                                text: TextConstant.images,
-                                onPressed: () async {
-                                  navigartorController.onItemTapped(0);
-                                  await postController.listByFileType(
-                                    PostEnum.IMAGE.type,
-                                  );
-                                  type = PostEnum.IMAGE.type;
-                                },
-                              )
-                            : ButtonSmallLight(
-                                text: TextConstant.images,
-                                onPressed: () async {
-                                  navigartorController.onItemTapped(0);
-                                  await postController.listByFileType(
-                                    PostEnum.IMAGE.type,
-                                  );
-                                  type = PostEnum.IMAGE.type;
-                                },
-                              ),
-                      ),
-                      Expanded(
-                        child: index == 1
-                            ? ButtonSmallDark(
-                                text: TextConstant.videos,
-                                onPressed: () async {
-                                  navigartorController.onItemTapped(1);
-                                  await postController.listByFileType(
-                                    PostEnum.VIDEO.type,
-                                  );
+              SizedBox(height: SizeToken.lg),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: SizeToken.sm),
+                child: Observer(
+                  builder: (context) {
+                    final index = navigartorController.currentIndex;
+                    return Row(
+                      spacing: SizeToken.sm,
+                      children: [
+                        Expanded(
+                          child: index == 0
+                              ? ButtonSmallDark(
+                                  text: TextConstant.images,
+                                  onPressed: () async {
+                                    navigartorController.onItemTapped(0);
+                                    await postController.listByFileType(
+                                      PostEnum.IMAGE.type,
+                                    );
+                                    type = PostEnum.IMAGE.type;
+                                  },
+                                )
+                              : ButtonSmallLight(
+                                  text: TextConstant.images,
+                                  onPressed: () async {
+                                    navigartorController.onItemTapped(0);
+                                    await postController.listByFileType(
+                                      PostEnum.IMAGE.type,
+                                    );
+                                    type = PostEnum.IMAGE.type;
+                                  },
+                                ),
+                        ),
+                        Expanded(
+                          child: index == 1
+                              ? ButtonSmallDark(
+                                  text: TextConstant.videos,
+                                  onPressed: () async {
+                                    navigartorController.onItemTapped(1);
+                                    await postController.listByFileType(
+                                      PostEnum.VIDEO.type,
+                                    );
 
-                                  type = PostEnum.VIDEO.type;
-                                },
-                              )
-                            : ButtonSmallLight(
-                                text: TextConstant.videos,
-                                onPressed: () async {
-                                  navigartorController.onItemTapped(1);
-                                  await postController.listByFileType(
-                                    PostEnum.VIDEO.type,
-                                  );
-                                  type = PostEnum.VIDEO.type;
-                                },
-                              ),
-                      ),
-                      Expanded(
-                        child: index == 2
-                            ? ButtonSmallDark(
-                                text: TextConstant.texts,
-                                onPressed: () async {
-                                  navigartorController.onItemTapped(2);
-                                  await postController.listByFileType(
-                                    PostEnum.TEXT.type,
-                                  );
-                                  type = PostEnum.TEXT.type;
-                                },
-                              )
-                            : ButtonSmallLight(
-                                text: TextConstant.texts,
-                                onPressed: () async {
-                                  navigartorController.onItemTapped(2);
-                                  await postController.listByFileType(
-                                    PostEnum.TEXT.type,
-                                  );
-                                  type = PostEnum.TEXT.type;
-                                },
-                              ),
-                      ),
-                    ],
-                  );
-                },
+                                    type = PostEnum.VIDEO.type;
+                                  },
+                                )
+                              : ButtonSmallLight(
+                                  text: TextConstant.videos,
+                                  onPressed: () async {
+                                    navigartorController.onItemTapped(1);
+                                    await postController.listByFileType(
+                                      PostEnum.VIDEO.type,
+                                    );
+                                    type = PostEnum.VIDEO.type;
+                                  },
+                                ),
+                        ),
+                        Expanded(
+                          child: index == 2
+                              ? ButtonSmallDark(
+                                  text: TextConstant.texts,
+                                  onPressed: () async {
+                                    navigartorController.onItemTapped(2);
+                                    await postController.listByFileType(
+                                      PostEnum.TEXT.type,
+                                    );
+                                    type = PostEnum.TEXT.type;
+                                  },
+                                )
+                              : ButtonSmallLight(
+                                  text: TextConstant.texts,
+                                  onPressed: () async {
+                                    navigartorController.onItemTapped(2);
+                                    await postController.listByFileType(
+                                      PostEnum.TEXT.type,
+                                    );
+                                    type = PostEnum.TEXT.type;
+                                  },
+                                ),
+                        ),
+                      ],
+                    );
+                  },
+                ),
               ),
               const SizedBox(height: SizeToken.md),
               Observer(
@@ -237,6 +238,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                   );
                 },
               ),
+              const SizedBox(height: SizeToken.lg),
             ],
           ),
         ),

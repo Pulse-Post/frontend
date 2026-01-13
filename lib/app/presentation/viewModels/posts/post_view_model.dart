@@ -30,6 +30,9 @@ abstract class PostViewModelBase with Store {
   bool serverError = false;
 
   @observable
+  PostDetailDto? post;
+
+  @observable
   List<PostDetailDto>? postList;
 
   @observable
@@ -119,7 +122,6 @@ abstract class PostViewModelBase with Store {
     isLoading = false;
   }
 
-
   @action
   Future remove(String id) async {
     isLoading = true;
@@ -132,6 +134,25 @@ abstract class PostViewModelBase with Store {
           TextConstant.sucessDeletePostMessage,
           IconConstant.success,
         );
+      },
+      (failure) {
+        serverError = true;
+        resultMessageService.showMessageError(
+          TextConstant.errorExecutingMessage,
+        );
+      },
+    );
+    isLoading = false;
+  }
+
+  @action
+  Future detail(String id) async {
+    isLoading = true;
+    final result = await postRepository.detail(id);
+    result.fold(
+      (success) {
+        serverError = false;
+        post = success;
       },
       (failure) {
         serverError = true;

@@ -55,4 +55,10 @@ final class Style {
       fontWeight: FontWeight.w600,
       fontFamily: 'Inter',
       color: color);
+
+  static TextStyle l6({Color? color}) => TextStyle(
+      fontSize: Font.xxs,
+      fontWeight: FontWeight.w400,
+      fontFamily: 'Inter',
+      color: color);
 }

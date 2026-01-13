@@ -14,7 +14,7 @@ class ButtonSmallLight extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ButtonDefault(
-      padding: const EdgeInsets.all(SizeToken.xs),
+  padding: const EdgeInsets.all(SizeToken.sm),
       backgroundColor: ColorToken.neutral,
       onPressed: onPressed,
       child: TextLabelL2Dark(text: text),

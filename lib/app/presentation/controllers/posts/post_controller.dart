@@ -23,6 +23,9 @@ abstract class PostControllerBase with Store {
   bool get isServerError => postViewModel.serverError;
 
   @computed
+  PostDetailDto? get post => postViewModel.post;
+
+  @computed
   List<PostDetailDto>? get postList => postViewModel.postList;
 
   @computed
@@ -47,5 +50,9 @@ abstract class PostControllerBase with Store {
 
   Future<void> remove(String id) async {
     await postViewModel.remove(id);
+  }
+
+  Future<void> detail(String id) async {
+    await postViewModel.detail(id);
   }
 }

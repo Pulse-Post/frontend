@@ -5,12 +5,12 @@ import 'package:uikit/uikit.dart';
 class ProfileMenuNavDetail extends StatelessWidget {
   final String? name;
   final String? image;
-  final bool isLarge;
+  final double? size;
   const ProfileMenuNavDetail({
     super.key,
     required this.name,
     this.image,
-    this.isLarge = false,
+    this.size,
   });
 
   @override
@@ -19,12 +19,12 @@ class ProfileMenuNavDetail extends StatelessWidget {
       child: image != null
           ? Image.network(
               image!,
-              width: isLarge? SizeToken.xl5: SizeToken.xl3,
-              height: isLarge? SizeToken.xl5: SizeToken.xl3,
+              width: size ?? SizeToken.xl3,
+              height: size ?? SizeToken.xl3,
             )
           : Container(
-              width: isLarge? SizeToken.xl5: SizeToken.xl3,
-              height: isLarge? SizeToken.xl5: SizeToken.xl3,
+              width: size ?? SizeToken.xl3,
+              height: size ?? SizeToken.xl3,
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: LinearGradient(

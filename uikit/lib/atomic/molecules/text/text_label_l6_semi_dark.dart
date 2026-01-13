@@ -2,29 +2,24 @@
 import 'package:flutter/material.dart';
 import 'package:uikit/uikit.dart';
 
-class TextBodyB1SemiDark extends StatelessWidget {
+class TextLabelL6SemiDark  extends StatelessWidget {
   final int? maxLines;
   final String text;
   final bool overflow;
   final Color? color;
-  final bool isLimited;
-  TextBodyB1SemiDark({
+  const TextLabelL6SemiDark({
     super.key,
     this.maxLines,
     required this.text,
     this.overflow = false,
     this.color,
-    this.isLimited = false,
   });
-
-  late final displayChars =
-      text.length > 80 ? '${text.substring(0, 80)}... mais' : text;
 
   @override
   Widget build(BuildContext context) {
     return TextDefault(
-      text: isLimited ? displayChars : text,
-      textStyle: Style.b1(color: ColorToken.semiDark),
+      text: text,
+      textStyle: Style.l6(color: ColorToken.semiDark),
       overflow: overflow,
       maxLines: maxLines,
     );

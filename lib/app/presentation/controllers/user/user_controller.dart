@@ -1,8 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:io';
+
 import 'package:mobx/mobx.dart';
 import 'package:pulse_post/app/domain/dtos/user/user_detail_dto.dart';
 import 'package:pulse_post/app/domain/dtos/user/user_login_dto.dart';
 import 'package:pulse_post/app/domain/dtos/user/user_register_dto.dart';
+import 'package:pulse_post/app/domain/dtos/user/user_update_dto.dart';
 
 import 'package:pulse_post/app/presentation/viewModels/user/user_view_model.dart';
 
@@ -41,5 +44,9 @@ abstract class UserControllerBase with Store {
   Future<void> load() async {
     await userViewModel.details();
     await userViewModel.loadToken();
+  }
+
+  Future<void> update(UserUpdateDto data, File? file) async {
+    await userViewModel.update(data, file);
   }
 }
