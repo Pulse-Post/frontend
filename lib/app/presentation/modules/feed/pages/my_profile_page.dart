@@ -70,7 +70,10 @@ class _MyProfilePageState extends State<MyProfilePage> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   IconButtonLargeDark(
-                                    onTap: () => context.go('/feed'),
+                                    onTap: () async{
+                                      context.go('/feed');
+                                      await postController.list();
+                                    },
                                     icon: IconConstant.arrowLeft,
                                   ),
                                   const SizedBox(width: SizeToken.sm),
